@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include( './partials/head') %>
+    <title>Blog</title>
+</head>
+<body></body>
+    <!-- Include the navigation partial -->
+    <%- include('./partials/nav') %>
+    <div class="container mt-4">
+        <h1><%= blog.title %></h1>
+        <img src="<%= blog.coverImage %>" width="300px" />
+        <div class="mt-3">
+            <p><%= blog.content %></p>
+        </div>
+      </div>
+    <div class="container mt-4">
+        <h5>Created by:</h5>
+        <% if (blog.createdBy) { %>
+            <img src="<%= blog.createdBy.profileImageURL %>" class="small-profile-img" width="50" />
+            <%= blog.createdBy.fullName %>
+        <% } else { %>
+            <p>Unknown Author</p>
+        <% } %>
+    </div>
+    
+<div class="container mt-4">
+    <h3>Comments (<%= comments.length %>) </h3>
+    <% if (locals.user) { %>
+        <form action="/blog/comment/<%= blog._id %>" method="POST">
+            <div class="mb-3">
+              <label for="comment" class="form-label">Comment</label>
+              <textarea class="form-control" id="comment" name="content" placeholder="enter your comment" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        
+    <% } else { %>
+        <div class="alert alert-warning" role="alert">
+            Please <a href="/user/signin">sign in</a> to comment
+          </div>
+    <% } %>
+    <div class="mt-3">
+        <% comments.forEach(comment => { %>
+            <div>
+                <img src="<%= comment.createdBy.profileImageURL %>" width="50px" />
+                <%= comment.createdBy.fullName %>
+                <pre><%= comment.content %></pre>
+              </div>
+        <% }) %>
+</div>
+
+
+    <!-- Include the script partial -->
+    <%- include('./partials/script') %>
+</body>
+</html>

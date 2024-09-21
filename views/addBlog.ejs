@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include( './partials/head') %>
+    <title>Add New Blog</title>
+    <!-- Add Bootstrap and custom styles -->
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light background for a professional look */
+        }
+        .form-container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: 600; /* Bold labels for better readability */
+        }
+        textarea {
+            resize: none; /* Disable resize to avoid breaking the form layout */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation bar inclusion -->
+    <%- include( './partials/nav') %>
+
+    <div class="container mt-4">
+        <div class="form-container">
+            <h2 class="mb-4 text-center">Add New Blog</h2>
+
+            <form action="/blog" method="POST" enctype="multipart/form-data">
+                <!-- Title field -->
+                <div class="mb-3">
+                    <label for="title" class="form-label">Blog Title</label>
+                    <input type="text" name="title" class="form-control" id="title" placeholder="Enter your blog title" required>
+                </div>
+
+                <!-- Content field -->
+                <div class="mb-3">
+                    <label for="content" class="form-label">Content</label>
+                    <textarea name="content" class="form-control" id="content" rows="6" placeholder="Write your blog content here..." required></textarea>
+                </div>
+
+                <!-- Cover image field -->
+                <div class="mb-3"></div>
+                    <label for="coverImage" class="form-label">Upload Cover Image</label>
+                    <input type="file" name="coverImage" class="form-control" id="coverImage" accept="image/*" required>
+                </div>
+
+                <!-- Submit button -->
+                <div class="button" align="center">
+                    <button type="submit" class="btn btn-primary btn-block" >Submit Blog</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Script inclusion -->
+    <%- include( './partials/script') %>
+</body>
+</html>
